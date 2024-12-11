@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+    <head>
+        <title>お疲れ様でした。</title>
+        <link href="style.css" rel="stylesheet" type="text/css">
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+
+        <meta charset="UTF-8" />
+    </head>
+
+    <body>
+        <div id =content>
+            <div id="firstblock">
+                <h2>さいしょはグー...</h2>
+                <img src="img/goo.png" />
+
+                <h2>じゃんけん...</h2>
+                <p>
+                    <button onclick="play(1)" class="btn">グー</button>
+                    <button onclick="play(2)" class="btn">チョキ</button>
+                    <button onclick="play(3)" class="btn">パー</button>
+                </p>
+            </div>
+
+            <div id="secondblock" class="negative">
+                <p>コンピューターの手</p>
+                <img class="lose" width="150" src="img/goo.png">
+                <img class="lose" width="150" src="img/choki.png">
+                <img class="lose" width="150" src="img/paa.png">
+            
+                <p>あなたの手</p>
+                <img class="hands" width="150" src="img/goo.png">
+                <img class="hands" width="150" src="img/choki.png">
+                <img class="hands" width="150" src="img/paa.png">
+                
+                <h2>おめでとう！あなたの勝ちです</h2>
+            </div>
+        </div>
+
+        <div id="blocked" class="message" style="display: none;">
+            <img src="img/times.png" />
+            <button id="reset-button">キーを削除する</button>
+        </div>
+    </body>
+
+    <script>
+        function play (input) {
+            let target = document.getElementsByClassName("hands");
+            let element = document.getElementsByClassName("lose");
+            let erase = document.getElementById("firstblock");
+            let appear = document.getElementById("secondblock");
+
+            erase.classList.add("negative");
+            appear.classList.remove("negative")
+
+            if (input == 1){
+                target[0].classList.add("active");
+                element[1].classList.add("active");
+            } else if (input == 2){
+                target[1].classList.add("active");
+                element[2].classList.add("active");
+            } else if (input == 3){
+                target[2].classList.add("active");
+                element[0].classList.add("active");
+            }
+        }
+
+        (function() {
+            const ACCESS_KEY = 'user_accessed_site';
+            const content = document.getElementById('content');
+            const blocked = document.getElementById('blocked');
+            const resetButton = document.getElementById('reset-button');
+
+            if (localStorage.getItem(ACCESS_KEY)) {
+                content.style.display = 'none';
+                blocked.style.display = 'block';
+            } else {
+                localStorage.setItem(ACCESS_KEY, 'true');
+            }
+
+            resetButton.addEventListener('click', () => {
+                localStorage.removeItem(ACCESS_KEY);
+                alert('キーを削除しました。このページを再読み込みしてください。');
+            });
+        })();
+      </script>
+
+    <style>
+        body{
+            padding:0;
+            margin: 0;
+        }
+        #firstblock,
+        #secondblock{
+            text-align: center;
+        }
+        .hands,
+        .lose{
+            display: none;
+        }
+        .active{
+            display: inline !important;
+        }
+        .negative{
+            display: none !important;
+        }
+        #blocked{
+            width: 100%;
+            height: 100vh;
+        }
+        #blocked > img{
+            width: 100%;
+            height: 100vh;
+            bottom: 0px;
+            object-fit: cover; /* この一行を追加するだけ！ */
+        }
+    </style>
+</html>
