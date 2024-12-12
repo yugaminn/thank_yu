@@ -84,24 +84,24 @@
             }, 3000);
         }
 
-        // (function() {
-        //     const ACCESS_KEY = 'user_accessed_site';
-        //     const content = document.getElementById('content');
-        //     const blocked = document.getElementById('blocked');
-        //     const resetButton = document.getElementById('reset-button');
+        (function() {
+            const ACCESS_KEY = 'user_accessed_site';
+            const content = document.getElementById('content');
+            const blocked = document.getElementById('blocked');
+            const resetButton = document.getElementById('reset-button');
 
-        //     if (localStorage.getItem(ACCESS_KEY)) {
-        //         content.style.display = 'none';
-        //         blocked.style.display = 'block';
-        //     } else {
-        //         localStorage.setItem(ACCESS_KEY, 'true');
-        //     }
+            if (localStorage.getItem(ACCESS_KEY)) {
+                content.style.display = 'none';
+                blocked.style.display = 'block';
+            } else {
+                localStorage.setItem(ACCESS_KEY, 'true');
+            }
 
-        //     resetButton.addEventListener('click', () => {
-        //         localStorage.removeItem(ACCESS_KEY);
-        //         alert('キーを削除しました。このページを再読み込みしてください。');
-        //     });
-        // })();
+            resetButton.addEventListener('click', () => {
+                localStorage.removeItem(ACCESS_KEY);
+                alert('キーを削除しました。このページを再読み込みしてください。');
+            });
+        })();
       </script>
 
     <style>
