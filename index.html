@@ -4,47 +4,60 @@
         <title>お疲れ様でした。</title>
         <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
+        <link rel="icon" href="img/24.png" type="image/svg+xml">
+        <link rel="apple-touch-icon" href="img/24.pngg" />
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
 
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
     </head>
 
     <body>
         <div id =content>
             <div id="firstblock">
                 <div class="blank"></div>
-                <h2 class="title">さいしょはグー...</h2>
+                <div class="title font-scale1">さいしょはグー...</div>
                 <img class="handphoto" src="img/goo.png" />
 
-                <h2 class="title">じゃんけん...</h2>
+                <div class="title font-scale1">じゃんけん...</div>
                 <div class="container">
-                    <button onclick="play(1)" class="button-37">グー</button>
-                    <button onclick="play(2)" class="button-37">チョキ</button>
-                    <button onclick="play(3)" class="button-37">パー</button>
+                    <button onclick="play(1)" class="button-37 font-scale3">グー</button>
+                    <button onclick="play(2)" class="button-37 font-scale3">チョキ</button>
+                    <button onclick="play(3)" class="button-37 font-scale3">パー</button>
+                </div>
+
+                <div id="primal">
+                    <div id="incontent" class="font-scale1">
+                    webチーム<br>
+                    最後のじゃんけん
+                    </div>
                 </div>
             </div>
 
             <div id="secondblock" class="negative">
                 <div class="blank"></div>
-                <p class="text">コンピューターの手</p>
+                <div class="tex font-scale2">コンピューターの手</div>
                 <img class="lose handphoto" width="150" src="img/goo.png">
                 <img class="lose handphoto" width="150" src="img/choki.png">
                 <img class="lose handphoto" width="150" src="img/paa.png">
             
-                <p class="text">あなたの手</p>
+                <div class="text font-scale2">あなたの手</div>
                 <img class="hands handphoto" width="150" src="img/goo.png">
                 <img class="hands handphoto" width="150" src="img/choki.png">
                 <img class="hands handphoto" width="150" src="img/paa.png">
                 
-                <h2 class="title">おめでとう！あなたの勝ちです</h2>
+                <div class="title font-scale1">おめでとう！あなたの勝ちです</div>
 
                 <div id="popup">
+                    <div id="inside" class="font-scale2">
                     おめでとうございます...<br>
                     そして、お疲れ様でした...<br>
                     <br>
                     koredemo tukatte yukkuri yasundene.
+                    </div>
                 </div>
             </div>
         </div>
@@ -56,6 +69,17 @@
     </body>
 
     <script>
+        window.onload = function () {
+            let starter = document.getElementById("primal");
+            setTimeout(function() {
+                starter.classList.add("vanish");
+            }, 2000);
+
+            setTimeout(function() {
+                starter.classList.add("vanish2");
+            }, 2500);
+        }
+
         function play (input) {
             setTimeout(function() {
                 let target = document.getElementsByClassName("hands");
@@ -80,8 +104,8 @@
 
             setTimeout(function() {
                 let popup = document.getElementById("popup");
-                popup.classList.add("active");
-            }, 3000);
+                popup.classList.add("appear");
+            }, 5000);
         }
 
         (function() {
@@ -119,7 +143,7 @@
 
         .container{
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             justify-content: center;
         }
         .button-37 {
@@ -128,25 +152,14 @@
             align-items: center;
             position: relative;
             width: 30%;
-            max-width: 200px;
-            margin: 10px;
+            max-width: 600px;
+            min-width: 200px;
+            margin: 5px auto !important;
             padding: 0.2em 1em;
             border: 1px solid #2589d0;
             border-radius:100px;
             background-color: transparent;
             color: #2589d0;
-            font-size: clamp(10px, 3vw, 24px);
-        }
-        @media screen and (max-width: 500px) {
-            .container{
-                flex-direction: column;
-            }
-            .button-37 {
-                margin: 5px auto !important;
-                width: 60% !important;
-                font-size: 6vw !important;
-                max-width: 400px;
-            }
         }
         .button-37:focus {
             color: transparent;
@@ -177,6 +190,10 @@
         .negative{
             display: none !important;
         }
+        .tex{
+            margin-bottom: 10px;
+            color: #2589d0;
+        }
         .text{
             margin-top: 40px;
             margin-bottom: 10px;
@@ -188,6 +205,29 @@
         .blank{
             width: 100vw;
             height: 50px;
+        }
+        #primal{
+            display: block;
+            position: absolute;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 2;
+            text-align: center;
+            background-color: #2589d0;
+            transition: 0.5s;
+        }
+        #incontent{
+            font-weight: 700;
+            margin: 20% auto;
+            color: aliceblue;
+        }
+        .vanish{
+            opacity: 0 !important;
+            transition: 0.5s;
+        }
+        .vanish2{
+            display: none !important;
         }
 
         /*アクセス管理*/
@@ -209,15 +249,33 @@
         }
 
         #popup{
-            display: none;
+            opacity: 0;
             position: absolute;
             width: 80%;
-            height: 80vh;
+            height: 90vh;
             top: 5%;
             left: 10%;
             border-radius: 10px;
             background-color: aliceblue;
+            transition: 0.5s;
+        }
+        #inside{
+            margin: 40px;
+        }
+        .appear{
+            opacity: 1 !important;
+            transition: 0.5s;
         }
 
+        .font-scale1{ /*強調テキスト*/
+            font-size: clamp(18px, 3vw, 36px);
+            font-weight: 700;
+        }
+        .font-scale2{ /*ノーマルテキスト*/
+            font-size: clamp(14px, 1.8vw, 28px);
+        }
+        .font-scale3{ /*ボタン*/
+            font-size: clamp(18px, 3vw, 36px);
+        }
     </style>
 </html>
