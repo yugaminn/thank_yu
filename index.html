@@ -53,18 +53,38 @@
 
                 <div id="popup">
                     <div id="inside" class="font-scale2">
-                    おめでとうございます...<br>
-                    そして、お疲れ様でした...<br>
-                    <br>
-                    koredemo tukatte yukkuri yasundene.
+                        おめでとうございます...<br>
+                        そして、お疲れ様でした...<br>
+                        <br>
+                        koredemo tukatte yukkuri yasundene.
                     </div>
+                    <a class="itembox" href="https://sbg.jp/cp/exchange/85253/ddefff3d8e08c2f7d422f360206ee501"  target="_blank" rel="noopener noreferrer">
+                        <img class="item" src="img/23119_0.jpg" />
+                        <div class="font-scale2">明治プロビオヨーグルト R-1</div>
+                    </a>
+                    <a class="itembox" href="https://gift.starbucks.co.jp/e/1733ZTgSmwq7DW8rKn7RTujjGaXKUS83"  target="_blank" rel="noopener noreferrer">
+                        <img class="item" src="img/23117_0.jpg" />
+                        <div class="font-scale2">スターバックス フードチケット</div>
+                    </a>
+                    <a class="itembox" href="https://gift.starbucks.co.jp/e/1733jMv3XHbidvI4ZmQC5NnCFpXVrzyz"  target="_blank" rel="noopener noreferrer">
+                        <img class="item" src="img/23118_0.jpg" />
+                        <div class="font-scale2">スターバックス ドリンクチケット</div>
+                    </a>
+                    <button id="closer">×</button>
                 </div>
+
+                <img id="opener" src="img/gift.png" />
             </div>
         </div>
 
         <div id="blocked" class="message" style="display: none;">
             <img src="img/timeflies.png" />
             <button id="reset-button">reset</button>
+            <div class="float">
+                <a href="https://sbg.jp/cp/exchange/85253/ddefff3d8e08c2f7d422f360206ee501" target="_blank" rel="noopener noreferrer">明治プロビオヨーグルト R-1</a>
+                <a href="https://gift.starbucks.co.jp/e/1733ZTgSmwq7DW8rKn7RTujjGaXKUS83"  target="_blank" rel="noopener noreferrer">スターバックス フードチケット</a>
+                <a href="https://gift.starbucks.co.jp/e/1733jMv3XHbidvI4ZmQC5NnCFpXVrzyz"  target="_blank" rel="noopener noreferrer">スターバックス ドリンクチケット</a>
+            </div>
         </div>
     </body>
 
@@ -102,11 +122,34 @@
                 }
             }, 1000);
 
+            let popup = document.getElementById("popup");
             setTimeout(function() {
-                let popup = document.getElementById("popup");
+                popup.classList.add("displayblock");
                 popup.classList.add("appear");
-            }, 5000);
+            }, 3000);
         }
+
+        function close () {
+            console.log("activated");
+            let closetarget = document.getElementById("popup");
+            closetarget.classList.remove("appear");
+            setTimeout(function() {
+                closetarget.classList.remove("displayblock");
+            }, 500);
+            let openbox = document.getElementById("opener");
+            openbox.classList.add("displayblock");
+        }
+        let control = document.getElementById("closer");
+        control.addEventListener("click", close);
+
+        function opener () {
+            console.log("activated");
+            let closetarget = document.getElementById("popup");
+            closetarget.classList.add("displayblock");
+            closetarget.classList.add("appear");
+        }
+        let control2 = document.getElementById("opener");
+        control2.addEventListener("click", opener);
 
         (function() {
             const ACCESS_KEY = 'user_accessed_site';
@@ -148,6 +191,7 @@
             justify-content: center;
         }
         .button-37 {
+            cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -248,8 +292,22 @@
         #reset-button{
             position: absolute;
         }
+        .float{
+            position: absolute;
+            bottom: 0;
+            right:10px;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .float > a{
+            text-align: right;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
 
         #popup{
+            display: none;
             opacity: 0;
             position: absolute;
             width: 80%;
@@ -263,9 +321,49 @@
         #inside{
             margin: 40px;
         }
+        .displayblock{
+            display: block !important;
+        }
         .appear{
             opacity: 1 !important;
             transition: 0.5s;
+        }
+        .itembox{
+            display: block;
+            margin-bottom: 20px;
+        }
+        .item{
+            width: 90%;
+            max-width: 300px;
+            text-decoration: none;
+            color: black;
+        }
+        .item > div{
+            text-decoration: none;
+        }
+        #closer{
+            display: block;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            border-radius: 50%;  /* 丸みの度合い */
+            border: none;
+            background: #2589d0; /* ボタンの背景色 */
+            color: aliceblue;
+            cursor: pointer;
+        }
+        #opener{
+            cursor: pointer;
+            display: none;
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 45px;
+            height: 45px;
+            z-index: 1;
         }
 
         .font-scale1{ /*強調テキスト*/
