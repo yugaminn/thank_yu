@@ -116,6 +116,7 @@
 
             if (localStorage.getItem(ACCESS_KEY)) {
                 content.style.display = 'none';
+                content.remove(); // domごと削除
                 blocked.style.display = 'block';
             } else {
                 localStorage.setItem(ACCESS_KEY, 'true');
